@@ -1,0 +1,42 @@
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+def extension = 'jar'
+def artifactId = 'pojo2json'
+group = 'br.inatel.angrydevs'
+version = '0.0.1'
+jar.archiveName = artifactId + "-" + version + '.' + extension
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    api 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.google.guava:guava:21.0'
+    testImplementation 'junit:junit:4.12'
+    compile gradleApi()
+    compile localGroovy()
+}
+
+artifacts {
+    archives file: file("./build/libs/${jar.archiveName}")
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenLocal().url)
+            pom.groupId = group
+            pom.artifactId = artifactId
+            pom.version = version
+        }
+    }
+}
