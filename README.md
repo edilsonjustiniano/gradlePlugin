@@ -17,10 +17,15 @@
 
 ```groovy
 //...
-apply plugin 'br.inatel.angrydevs.pojo2json'
+apply plugin: 'br.inatel.angrydevs.pojo2json'
 //...
-dependencies {
-    classpath 'br.inatel.angrydevs:pojo2json:0.0.1'
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'br.inatel.angrydevs:pojo2json:0.0.1'
+    }
 }
 //...
 ```
